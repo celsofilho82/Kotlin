@@ -1,15 +1,28 @@
 fun main() {
 
     println("Bem vindo ao ByteBank!")
-    val titular: String = "Celso"
-    val numeroConta: Int = 1439
-    var saldo: Double = 10.0
+    val conta = Conta()
+    conta.titular = "Celso"
+    conta.numero = 1000
+    conta.saldo = 200.0
+    println("Titular: ${conta.titular}")
+    println("Numero: ${conta.numero}")
+    println("Saldo: ${conta.saldo}")
 
-    println("Titular: $titular")
-    println("Número da conta: $numeroConta")
-    println("Saldo: $saldo")
-    println()
+    deposita(conta, 50.0)
+}
 
+fun deposita(conta: Conta, valor: Double){
+    println("Depositando na conta titular ${conta.titular}")
+    println("Valor R$ $valor")
+    conta.saldo += valor
+    println("Saldo: R$ ${conta.saldo}")
+}
+
+class Conta {
+    var titular: String = ""
+    var numero: Int = 0
+    var saldo: Double = 0.0
 }
 
 fun estruturaRepeticao() {
@@ -81,7 +94,7 @@ fun estruturaRepeticao() {
     }
 }
 
-fun testeCondicional(saldo: Double) {
+fun estruturaCondicional(saldo: Double) {
     // Estrutura condicional com IF-ELSE
     if (saldo > 0.0) {
         println("Conta é positiva")
