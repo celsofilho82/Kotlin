@@ -1,28 +1,56 @@
 fun main() {
 
     println("Bem vindo ao ByteBank!")
-    val conta = Conta()
-    conta.titular = "Celso"
-    conta.numero = 1000
-    conta.saldo = 200.0
-    println("Titular: ${conta.titular}")
-    println("Numero: ${conta.numero}")
-    println("Saldo: ${conta.saldo}")
+    val contaCelso = Conta()
+    contaCelso.titular = "Celso"
+    contaCelso.numero = 1000
+    contaCelso.setSaldo(200.0)
+    println("Titular: ${contaCelso.titular}")
+    println("Numero: ${contaCelso.numero}")
+    println("Saldo: ${contaCelso.getSaldo()}")
 
-    deposita(conta, 50.0)
-}
+    val contaJeane = Conta()
+    contaJeane.titular = "Celso"
+    contaJeane.numero = 1001
+    contaJeane.setSaldo(0.0)
 
-fun deposita(conta: Conta, valor: Double){
-    println("Depositando na conta titular ${conta.titular}")
-    println("Valor R$ $valor")
-    conta.saldo += valor
-    println("Saldo: R$ ${conta.saldo}")
+    contaCelso.deposita(50.0)
+    contaCelso.saque(160.0)
+    contaCelso.transfere(50.0, contaJeane)
+    println("Saldo: ${contaJeane.getSaldo()}")
 }
 
 class Conta {
     var titular: String = ""
     var numero: Int = 0
-    var saldo: Double = 0.0
+    private var saldo: Double = 0.0
+
+    fun getSaldo(): Double{
+        return this.saldo
+    }
+
+    fun setSaldo(valor: Double){
+        if (valor > 0){
+            this.saldo += valor
+        }
+    }
+
+    fun deposita(valor: Double){
+        this.saldo += valor
+    }
+
+    fun saque(valor: Double){
+        if (this.saldo >= valor){
+            saldo -= valor
+        } else {
+            println("Saldo insuficiente")
+        }
+    }
+
+    fun transfere(valor: Double, contaDestino: Conta){
+        this.saque(valor)
+        contaDestino.deposita(valor)
+    }
 }
 
 fun estruturaRepeticao() {
